@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iss.okair.db.mapper.EmployeeMapper">
+	<resultMap type="com.iss.okair.db.entity.Employee" id="BaseResultMap">
+		<id property="id" column="id" jdbcType="INTEGER" />
+		<result property="empno" column="empNo" jdbcType="VARCHAR" />
+		<result property="namecn" column="namecn" jdbcType="VARCHAR" />
+		<result property="reportto" column="reportTo" jdbcType="INTEGER"/>
+		<result property="dept" column="dept" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id,empNo,namecn,reportTo,dept
+	</sql>
+
+	<select id="selectByExample" parameterType="com.iss.okair.db.entity.Employee"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from employee 
+		<where>
+			<if test="namecn != null and namecn!=''" >
+				<bind name="namecn" value="'%'+namecn+'%'"/>
+				and namecn like '${namecn}'
+			</if>
+			<if test="dept != null and dept!='-1'">
+				and dept=#{dept,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	
+	<select id="findAll" resultMap="BaseResultMap">
+		select * from employee order by namecn 
+	</select>
+</mapper>	

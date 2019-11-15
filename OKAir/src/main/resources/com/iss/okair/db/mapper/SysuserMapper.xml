@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iss.okair.db.mapper.SysuserMapper">
+	<resultMap type="com.iss.okair.db.entity.Sysuser" id="BaseResultMap">
+		<id property="id" column="id" jdbcType="INTEGER"/>
+		<result property="uid" column="uid" jdbcType="VARCHAR"/>
+		<result property="pwd" column="pwd" jdbcType="VARCHAR"/>
+		<result property="nickname" column="nickName" jdbcType="VARCHAR"/>
+		<result property="role" column="role" jdbcType="VARCHAR"/>
+		<result property="createtime" column="createTime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+	id,uid,pwd,nickName,role,createTime
+	</sql>
+	
+	<select id="selectByExample" parameterType="com.iss.okair.db.entity.Sysuser"
+	resultMap="BaseResultMap">
+	select
+	<include refid="Base_Column_List"/>
+	from sysuser
+	<where>
+	<if test="role!=null and role!='-1'">
+	    and role=#{role,jdbcType=VARCHAR}
+	</if>
+	<if test="uid!=null and uid!=''">
+	    <bind name="uid" value="'%'+uid+'%'"/>
+	    and uid like '${uid}'
+	</if>
+	</where>
+	</select>
+	<select id="loginCheck" parameterType="com.iss.okair.db.entity.Sysuser"
+	resultMap="BaseResultMap">
+	select<include refid="Base_Column_List"/>from sysuser where uid=#{uid,jdbcType=VARCHAR} and pwd=#{pwd,jdbcType=VARCHAR}
+	</select>
+</mapper>

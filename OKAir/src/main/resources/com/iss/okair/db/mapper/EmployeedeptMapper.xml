@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iss.okair.db.mapper.EmployeedeptMapper">
+  <resultMap id="BaseResultMap" type="com.iss.okair.db.entity.Employeedept">
+    <result column="dept" jdbcType="VARCHAR" property="dept" />
+  </resultMap>
+ <select id="selectAll" resultMap="BaseResultMap">
+ 	select dept from empdept order by dept
+ </select>
+</mapper>

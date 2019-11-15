@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iss.okair.db.mapper.AssetsFinanceMapper">
+<resultMap type="com.iss.okair.db.entity.AssetsFinance" id="BaseResultMap">
+	<id property="id" column="id" jdbcType="VARCHAR"/>
+	<result property="assetscode" column="assetsCode" jdbcType="VARCHAR"/>
+	<result property="assetstype" column="assetsType" jdbcType="INTEGER"/>
+	<result property="namecn" column="nameCn" jdbcType="VARCHAR"/>
+	<result property="unitamount" column="unitAmount" jdbcType="DECIMAL"/>
+	<result property="financetype" column="financeType" jdbcType="VARCHAR"/>
+	<result property="organization" column="organization" jdbcType="VARCHAR"/>
+	<result property="cycle" column="cycle" jdbcType="INTEGER"/>
+	<result property="autocycle" column="autoCycle" jdbcType="INTEGER"/>
+	<result property="refbankno" column="refBankNo" jdbcType="VARCHAR"/>
+	<result property="createdate" column="createDate" jdbcType="TIMESTAMP"/>
+	<result property="createuser" column="createUser" jdbcType="VARCHAR"/>
+	<result property="comment" column="comment" jdbcType="VARCHAR"/>
+</resultMap>
+<sql id="Base_Column_List">
+	id,assetsCode,assetsType,nameCn,unitAmount,financeType,organization,cycle,autoCycle,refBankNo,createDate,createUser,comment
+</sql>
+<select id="selectByExample" parameterType="com.iss.okair.model.AssetsFinanceModel" resultMap="BaseResultMap">
+	select <include refid="Base_Column_List"/> from assets_finance
+	<where>
+		<choose>
+			<!-- 实现联动操作 -->
+			<when test="(assetsType2==null or assetsType2=='-1') and assetsType1!=null and assetsType1!='-1'">
+				and assetsType in(select id from category where parentId=#{assetsType1})
+			</when>
+			<!-- 重新定义 ，确保此下拉列表-->
+			<when test="assetsType2!=null and assetsType2!='-1'">
+				and assetsType=#{assetsType2}
+			</when>
+		</choose>
+		<if test="assetsNameCn!=null and assetsNameCn!=''">
+		<!-- 模糊查询，model -->
+			<bind name="nameCn" value="'%'+assetsNameCn+'%'"/>
+				and nameCn like '${nameCn}'
+		</if>
+		<if test="assetsCode!=null and assetsCode!=''">
+			<bind name="assetsCode" value="'%'+assetsCode+'%'"/>
+				and assetsCode like '${assetsCode}'
+		</if>
+		<!-- <if test="address!=null and address!=''">
+			<bind name="address" value="'%'+address+'%'"/>
+				and address like '${address}'
+		</if>
+		<if test="util!=null and util!=''">
+			<bind name="util" value="'%'+util+'%'"/>
+				and util like '${util}'
+		</if>
+	  	<if test="city!=null and city!='-1'">
+				and city=#{city,jdbcType=VARCHAR}
+		</if> 
+		<if test=" equityType!=null and  equityType!='-1'">
+				and  equityType=#{ equityType,jdbcType=INTEGER}
+		</if> -->
+	<!-- 	<if test="assetsType1!=null and assetsType1!='-1'">
+				and assetsType1=#{assetsType1,jdbcType=VARCHAR}
+		</if>
+		<if test="assetsType2!=null assetsType2!='-1'">
+				and assetsType2=#{assetsType2,jdbcType=VARCHAR}
+		</if> -->
+	</where>
+</select>
+<select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+	select <include refid="Base_Column_List"/> from assets_finance where id=#{id,jdbcType=VARCHAR}
+</select>
+<insert id="addAssetsFinance" parameterType="com.iss.okair.db.entity.AssetsFinance">
+	insert into assets_finance
+	<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id!=null">
+			id,
+		</if>
+		<if test="assetscode!=null">
+			assetsCode,
+		</if>
+		<if test="assetstype!=null">
+			assetsType,
+		</if>
+		<if test="namecn!=null">
+			nameCn,
+		</if>
+		<if test="unitamount!=null">
+			unitAmount,
+		</if>
+		<if test="financetype!=null">
+			financeType,
+		</if>
+		<if test="organization!=null">
+			organization,
+		</if>
+		<if test="cycle!=null">
+			cycle,
+		</if>
+		<if test="autocycle!=null">
+			autoCycle,
+		</if>
+		<if test="refbankno!=null">
+			refBankNo,
+		</if>
+		<if test="createdate!=null">
+			createDate,
+		</if>
+		<if test="createuser!=null">
+			createUser,
+		</if>
+		<if test="comment!=null">
+			comment,
+		</if>
+	</trim>
+	<trim prefix="values(" suffix=")" suffixOverrides=",">
+		<if test="id!=null">
+			#{id,jdbcType=VARCHAR},
+		</if>
+		<if test="assetscode!=null">
+			#{assetscode,jdbcType=VARCHAR},
+		</if>
+		<if test="assetstype!=null">
+			#{assetstype,jdbcType=INTEGER},
+		</if>
+		<if test="namecn!=null">
+			#{namecn,jdbcType=VARCHAR},
+		</if>
+		<if test="unitamount!=null">
+			#{unitamount,jdbcType=DECIMAL},
+		</if>
+		<if test="financetype!=null">
+			#{financetype,jdbcType=VARCHAR},
+		</if>
+		<if test="organization!=null">
+			#{organization,jdbcType=VARCHAR},
+		</if>
+		<if test="cycle!=null">
+			#{cycle,jdbcType=INTEGER},
+		</if>
+		<if test="autocycle!=null">
+			#{autocycle,jdbcType=INTEGER},
+		</if>
+		<if test="refbankno!=null">
+			#{refbankno,jdbcType=VARCHAR},
+		</if>
+		<if test="createdate!=null">
+			#{createdate,jdbcType=TIMESTAMP},
+		</if>
+		<if test="createuser!=null">
+			#{createuser,jdbcType=VARCHAR},
+		</if>
+		<if test="comment!=null">
+			#{comment,jdbcType=VARCHAR}
+		</if>
+	</trim>
+</insert>
+<select id="countAll" resultType="java.lang.Integer">
+	select count(1) from assets_finance
+</select>
+<update id="updateAssetsFinance" parameterType="com.iss.okair.db.entity.AssetsFinance">
+	update assets_finance set
+		<if test="id!=null">
+			id=#{id,jdbcType=VARCHAR},
+		</if>
+		<if test="assetscode!=null">
+			assetsCode=#{assetscode,jdbcType=VARCHAR},
+		</if>
+		<if test="assetstype!=null">
+			assetsType=#{assetstype,jdbcType=INTEGER},
+		</if>
+		<if test="namecn!=null">
+			nameCn=#{namecn,jdbcType=VARCHAR},
+		</if>
+		<if test="unitamount!=null">
+			unitAmount=#{unitamount,jdbcType=DECIMAL},
+		</if>
+		<if test="financetype!=null">
+			financeType=#{financetype,jdbcType=VARCHAR},
+		</if>
+		<if test="organization!=null">
+			organization=#{organization,jdbcType=VARCHAR},
+		</if>
+		<if test="cycle!=null">
+			cycle=#{cycle,jdbcType=INTEGER},
+		</if>
+		<if test="autocycle!=null">
+			autoCycle=#{autocycle,jdbcType=INTEGER},
+		</if>
+		<if test="refbankno!=null">
+			refBankNo=#{refbankno,jdbcType=VARCHAR},
+		</if>
+		<if test="createdate!=null">
+			createDate=#{createdate,jdbcType=TIMESTAMP},
+		</if>
+		<if test="createuser!=null">
+			createUser=#{createuser,jdbcType=VARCHAR},
+		</if>
+		<if test="comment!=null">
+			comment=#{comment,jdbcType=VARCHAR}
+		</if>
+	
+		where id=#{id,jdbcType=VARCHAR}
+</update>
+</mapper>

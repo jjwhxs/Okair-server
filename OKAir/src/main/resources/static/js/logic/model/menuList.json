@@ -1,0 +1,74 @@
+[
+	{
+		"text": "<span class='glyphicon glyphicon-th-list' /> 基础信息管理",
+		"backColor": "#428bca",
+		"color": "#ffffff",
+		"selectable": false,
+		"nodes": [
+			{
+				"text": "<span class='glyphicon glyphicon-book' /> 数据字典管理",
+				"href":"/baseInfo/sysDict"
+			},
+			{
+				"text": "<span class='glyphicon glyphicon-list-alt' /> 资产分类管理",
+				"href":"/baseInfo/category"
+			},
+			{
+				"text": "<span class='glyphicon glyphicon-briefcase' /> 公司职员管理",
+				"href":"/baseInfo/employee"
+			},
+			{
+				"text": "<span class='glyphicon glyphicon-user' /> 系统用户管理",
+				"href":"/baseInfo/sysUser"
+			}
+		]
+	},
+	{
+		"text": "<span class='glyphicon glyphicon-inbox' />  资产信息管理",
+		"backColor": "#428bca",
+		"color": "#ffffff",
+		"selectable": false,
+		"nodes": [
+			{
+				"text": "<span class='glyphicon glyphicon-paperclip' /> 普通资产信息",
+				"href":"/assets/normal"
+			},
+			{
+				"text": "<span class='glyphicon glyphicon-yen' /> 金融资产信息",
+				"href":"/assets/finance"
+			},
+			{
+				"text": "<span class='glyphicon glyphicon-cog' /> 车辆资产信息",
+				"href":"/assets/car"
+			},
+			{
+				"text": "<span class='glyphicon glyphicon-home' /> 不动产信息",
+				"href":"/assets/permanent"
+			}
+		]
+	},
+	{
+		"text": "<span class='glyphicon glyphicon-transfer' />  资产流转管理",
+		"backColor": "#428bca",
+		"color": "#ffffff",
+		"selectable": false,
+		"nodes": [
+		      {
+		        "text": "<span class='glyphicon glyphicon-transfer' /> 普通资产流转管理",
+		        "href":"/trans/normal"
+		      },
+		      {
+		        "text": "<span class='glyphicon glyphicon-transfer' /> 金融资产流转管理",
+		        "href":"/trans/finance"
+		      },
+		      {
+		        "text": "<span class='glyphicon glyphicon-transfer' /> 车辆资产流转管理",
+		        "href":"/trans/car"
+		      },
+		      {
+		        "text": "<span class='glyphicon glyphicon-transfer' /> 不动产流转管理",
+		        "href":"/trans/permanent"
+		      }
+		 ]
+	}
+]

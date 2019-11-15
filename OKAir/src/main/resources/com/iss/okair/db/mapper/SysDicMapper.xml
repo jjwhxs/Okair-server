@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iss.okair.db.mapper.SysdictMapper">
+	<resultMap type="com.iss.okair.db.entity.Sysdict" id="BaseResultMap">
+		<id property="id" column="id" jdbcType="INTEGER" />
+		<result property="typecode" column="typeCode" jdbcType="VARCHAR" />
+		<result property="value" column="value" jdbcType="VARCHAR" />
+		<result property="display" column="display" jdbcType="VARCHAR" />
+		<result property="desc" column="desc" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id,typeCode,value,display
+	</sql>  
+	<select id="finddict" parameterType="com.iss.okair.db.entity.Sysdict"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sysdictvalue
+		<where>
+		<if test="typecode!=null and typecode!='-1'">
+		and typeCode=#{typecode,jdbcType=VARCHAR}
+		</if>
+		<if test="display!=null and display!=''">
+		and display=#{display,jdbcType=VARCHAR}
+		</if>
+		</where>
+		    
+	</select>
+<select id="findlist" parameterType="String"
+ resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List"/>
+  from sysdictvalue
+ <where>
+ <if test="_parameter != null">
+  typeCode = #{typeCode,jdbcType=VARCHAR}
+ </if>
+ <if test="_parameter == null">
+ typeCode is null
+ </if>
+ </where>
+</select>
+
+</mapper>

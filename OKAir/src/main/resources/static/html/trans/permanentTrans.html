@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<base href="/" />
+<title>资产流转</title>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div id="divSearchForm" class="col-md-10">
+				<div>
+					<label for="selTransType">资产操作：</label>
+					<select id="selTransType" >
+						<option value="2" selected="selected">资产登记</option>
+						<option value="4">资产转移</option>
+					</select>
+				</div>
+				<div>
+					<label for="tbxAssetsName">资产名称：</label>
+					<input type="text" id="tbxAssetsName" />
+				</div>
+				<div>
+					<label for="tbxBatchNo">批次编号：</label>
+					<input type="text" id="tbxBatchNo" />
+				</div>
+				<div>
+					<button type="button" id="btnSearch" class="btn-primary">
+						<span class="glyphicon glyphicon-search" />
+						检索Search
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="checkOutList">
+			<div class="col-md-10">
+				<h4>可领用资产列表：</h4>
+				<div id="divCheckoutResult">
+					<table id="tblCheckoutResult">
+						<thead>
+							<tr>
+								<th><span class='glyphicon glyphicon-tags' />资产编号</th>
+								<th>资产名称</th>
+								<th>批次编号</th>
+								<th>单价（￥）</th>
+								<th>当前库存量</th>
+								<th>采购人</th>
+								<th>入库日期</th>
+								<th>领用操作</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="shiftList">
+			<div class="col-md-10">
+				<h4>可转移资产列表：</h4>
+				<div id="divShiftResult">
+					<table id="tblShiftResult">
+						<thead>
+							<tr>
+								<th><span class='glyphicon glyphicon-tags' />资产编号</th>
+								<th>资产名称</th>
+								<th>批次编号</th>
+								<th>单价（￥）</th>
+								<th>持有数量</th>
+								<th>当前持有人</th>
+								<th>领用时间</th>
+								<th>转移操作</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 资产领用/转移表单 -->
+	<div id="divAssetsTrans" tabindex="-1" role="dialog" aria-labelledby="assetsInstockTitle" aria-hidden="true">
+		<div class="modal-dialog">
+			<div id="content" class="modal-content">
+				<div id="transHistoryHead" class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="transHistoryTitle">
+						<span class="glyphicon glyphicon-equalizer"></span>资产流转-<span id="spanTransType"></span> 
+					</h4>
+				</div>
+				<div class="modal-body">
+					<form id="formAssetsTrans">
+						<div id="divTransAlert" role="alert"></div>
+						<div id="divTransContent">
+							<div>
+								<label for="tbxAssetsInfo">资产信息：</label>
+								<div class="input-group">
+									<input type="text" id="tbxAssetsInfo" readonly="readonly" />
+								</div>
+							</div>
+							<div>
+								<label for="tbxCount">操作数量：</label>
+								<div class="input-group">
+									<input type="number" id="tbxCount" required="required" />
+									<span class="input-group-addon" >
+										<span class="glyphicon glyphicon-asterisk" ></span>
+									</span>
+								</div>
+							</div>
+							<div>
+								<label for="tbxPrice">单价：</label>
+								<div class="input-group">
+									<span class="input-group-addon">￥</span>
+									<input type="text" id="tbxPrice" readonly="readonly" />
+								</div>
+							</div>
+							<div>
+								<label for="tbxTotalPrice">合计总价：</label>
+								<div class="input-group">
+									<span class="input-group-addon">￥</span>
+									<input type="text" id="tbxTotalPrice" readonly="readonly" />
+								</div>
+							</div>
+							<div>
+								<label for="tbxTransDate">操作时间：</label>
+								<div class="input-group">
+									<input type="date" id="tbxTransDate" required="required" />
+									<span class="input-group-addon" >
+										<span class="glyphicon glyphicon-asterisk" ></span>
+									</span>
+								</div>
+							</div>
+							<div id="divHandlerEmp">
+								<label for="tbxHandlerEmp">当前持有人：</label>
+								<div class="input-group">
+									<input type="text" id="tbxHandlerEmp" readonly="readonly" />
+								</div>
+							</div>
+							<div>
+								<label for="selTargetEmp">领用人：</label>
+								<div class="input-group">
+									<select id="selTargetEmp" required="required"></select>
+									<span class="input-group-addon" >
+										<span class="glyphicon glyphicon-asterisk" ></span>
+									</span>
+								</div>
+							</div>
+							<div>
+								<label for="tbxTransComment">备注说明：</label>
+								<div class="input-group">
+									<textarea rows="2" id="tbxTransComment"></textarea>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn-primary" id="btnCheckout">
+							<span class="glyphicon glyphicon-share" /> 出库 Checkout</button>
+					<button class="btn-primary" id="btnShift">
+							<span class="glyphicon glyphicon-retweet" /> 转移 Shife</button>
+					<button class="btn-default" data-dismiss="modal" id="btnCancelInstock">
+							<span class="glyphicon glyphicon-remove" /> 取消 Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="js/bower_components/requirejs/require.js" data-main="js/logic/permanentTrans"></script>
+</html>

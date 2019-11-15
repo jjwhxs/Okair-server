@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>用户登陆</title>
+    <base href="/">
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div id="loginAlert" role="alert" style="display: none;">登录失败，请重新登录</div>
+	</div>
+    <div class="row">
+        <div class="col-md-10" style="line-height: 40px">
+        	<div class="form-horizontal">
+	            <div class="form-group col-md-6">
+	                <div class="input-group ">
+	                	<span class="input-group-addon glyphicon glyphicon-user"></span>
+	                	<input type="text" id="tbxUid" name="uid" class="form-control" placeholder="用户名" >
+	            	</div>
+	            </div>
+	            <div class="form-group col-md-6">
+	                <div class="input-group">
+	                	<span class="input-group-addon glyphicon glyphicon-lock"></span>
+	               		<input type="password" id="tbxPwd" name="pwd" class="form-control" placeholder="密码"/>
+	                </div>
+	            </div>
+	            <div class="form-group col-md-6 text-right">
+	            	<button id="btnLogin" class="btn btn-success" style="width: 120px">
+		            	<span class="glyphicon glyphicon-ok"></span>
+		            	登陆 Login
+	            	</button>
+	            </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="js/bower_components/requirejs/require.js" data-main="js/logic/login"></script>
+</html>

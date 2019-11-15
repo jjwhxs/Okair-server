@@ -1,0 +1,26 @@
+{
+  "name": "okair",
+  "version": "0.0.1",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "directory": "js",
+  "dependencies": {
+		"moment": "2.19.2",
+		"jquery":"3.2.1",
+		"jquery-form-validator":"2.3.77",
+		"bootstrap": "3.3.7",
+		"bootstrap-table": "1.11.1",
+		"bootstrap-treeview":"1.2.0",
+		"bootstrap-switch":"3.3.4",
+		"bootstrap-select":"1.12.4",
+		"slick-carousel":"1.8.1",
+		"requirejs":"2.3.5",
+		"require-css":"~0.1.10"
+	}
+}

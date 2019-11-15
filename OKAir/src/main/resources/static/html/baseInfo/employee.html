@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<base href="/">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div id="divSearchForm" class="col-md-10">
+				<div>
+					<label for="tbxNamecn">姓名：</label>
+					<input type="text" id="tbxNamecn" />
+				</div>
+				<div>
+					<label for="selDept">所在部门：</label>
+					<select id="selDept" ><option value="-1">全部</option></select>
+				</div>
+				<div>
+					<button type="button" id="btnSearch" class="btn-primary">
+						<span class="glyphicon glyphicon-search" />
+						检索Search
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-10">
+				<div id="divResult">
+					<table id="tblResult">
+						<thead>
+							<tr>
+								<th><span class='glyphicon glyphicon-tags' />员工编号</th>
+								<th>姓名</th>
+								<th>所在部门</th>
+								<th>上级</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="js/bower_components/requirejs/require.js" data-main="js/logic/employee"></script>
+</html>

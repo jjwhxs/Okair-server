@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iss.okair.db.mapper.DicttypeMapper">
+	<resultMap type="com.iss.okair.db.entity.Dicttype" id="TypeResultMap">
+		<result property="display"  column="display"  jdbcType="VARCHAR" />
+		<result property="typecode" column="typeCode" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="findtype" parameterType="com.iss.okair.db.entity.Dicttype"
+		resultMap="TypeResultMap">
+		select * from dicttype
+	</select>
+</mapper>

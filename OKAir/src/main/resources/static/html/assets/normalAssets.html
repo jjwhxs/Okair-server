@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<base href="/">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>普通资产管理</title>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div id="divSearchForm" class="col-md-10">
+				<div>
+					<label for="spanCategoryGroup">资产分类：</label>
+					<span id="spanCategoryGroup">
+						<select id="selCategory1" ><option value="-1">全部</option></select>
+						<select id="selCategory2" ><option value="-1">全部</option></select>
+					</span>
+				</div>
+				<div>
+					<label for="tbxAssetsName">资产名称：</label>
+					<input type="text" id="tbxAssetsName"  />
+				</div>
+				<div>
+					<label for="tbxAssetsCode">资产编号：</label>
+					<input type="text" id="tbxAssetsCode" />
+				</div>
+				<div>
+					<label for="selPackageType">包装类型：</label>
+					<select id="selPackageType"><option value="-1">全部</option></select>
+				</div>
+				<div>
+					<label for="tbxSupplier">供货商信息：</label>
+					<input type="text" id="tbxSupplier" />
+				</div>
+				<div>
+					<label for="cbkConsumptive">耗材：</label>
+					<input type="checkbox" id="cbkConsumptive"/>
+				</div>
+				<div>
+					<button type="button" id="btnSearch" class="btn-primary">
+						<span class="glyphicon glyphicon-search" />
+						检索Search
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-10">
+				<div id="toolsButtons">
+					<button type="button" id="btnAdd" class="btn-success">
+						<span class="glyphicon glyphicon-plus" />
+						新增资产 Add
+					</button>
+					<button type="button" id="btnInstockShow" class="btn-primary">
+						<span class="glyphicon glyphicon-download-alt" />
+						资产入库  Instock
+					</button>
+					<button type="button" id="btnEdit" class="btn-warning">
+						<span class="glyphicon glyphicon-edit" />
+						编辑资产 Edit
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-10">
+				<div id="divResult">
+					<table id="tblResult">
+						<thead>
+							<tr id="resultHeader">
+								<th data-halign="center" data-valign="middle">
+									<span class="glyphicon glyphicon-tags" />
+									资产编号
+								</th>
+								<th data-halign="center" data-valign="middle">资产名称</th>
+								<th data-halign="center" data-valign="middle">品牌</th>
+								<th data-halign="center" data-valign="middle">型号</th>
+								<th data-halign="center" data-valign="middle">供货商</th>
+								<th data-halign="center" data-valign="middle">库存记录</th>
+							</tr>
+						</thead>
+						<tbody id="resultBody"></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 信息编辑窗口 -->
+	<div id="divAssetsInfo" tabindex="-1" role="dialog" aria-labelledby="assetsInfoTitle" aria-hidden="true">
+		<div class="modal-dialog">
+			<div id="assetsInfoContent" class="modal-content">
+				<div id="AssetsInfoHead" class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="assetsInfoTitle"><span class="glyphicon glyphicon-equalizer"></span> 资产信息 </h4>
+				</div>
+				<div class="modal-body">
+					<form id="formAssetsInfo">
+						<input type="hidden" id="hidAssetsId" value="" />
+						<div id="divEditAlert" role="alert"></div>
+						<div id="divEditContent">
+							<div>
+								<label for="tbxAssetsCodeEdit">资产编号：</label>
+								<div class="input-group">
+									<input type="text" id="tbxAssetsCodeEdit" readonly="readonly" />
+								</div>
+							</div>
+							<div>
+								<label for="tbxAssetsNameEdit">资产名称：</label>
+								<div class="input-group">
+									<input type="text" id="tbxAssetsNameEdit" required="required" />
+									<span class="input-group-addon" >
+										<span class="glyphicon glyphicon-asterisk"></span>
+									</span>
+								</div>
+							</div>
+							<div>
+								<label for="spanCategoryGroupEdit">资产分类：</label>
+								<div class="input-group">
+									<div>
+											<select id="selCategoryEdit1" required="required" ></select>
+											<select id="selCategoryEdit2" required="required" ></select>
+									</div>
+								</div>
+							</div>
+							<div>
+								<label for="selPackageTypeEdit">包装类型：</label>
+								<div class="input-group">
+									<select id="selPackageTypeEdit"></select>
+								</div>
+							</div>
+							<div>
+								<label for="tbxNormalBrandEdit">品牌：</label>
+								<div class="input-group">
+									<input type="text" id="tbxNormalBrandEdit" required="required" />
+									<span class="input-group-addon" >
+										<span class="glyphicon glyphicon-asterisk"></span>
+									</span>
+								</div>
+							</div>
+							<div>
+								<label for="tbxNormalModelEdit">型号：</label>
+								<div class="input-group">
+									<input type="text" id="tbxNormalModelEdit" required="required" />
+									<span class="input-group-addon" >
+										<span class="glyphicon glyphicon-asterisk"></span>
+									</span>
+								</div>
+							</div>
+							<div>
+								<label for="tbxSupplierEdit">供货商名称：</label>
+								<div class="input-group">
+									<input type="text" id="tbxSupplierEdit" required="required" />
+									<span class="input-group-addon" >
+										<span class="glyphicon glyphicon-asterisk"></span>
+									</span>
+								</div>
+							</div>
+							<div>
+								<label for="tbxSupplierTelEdit">供货商电话：</label>
+								<div class="input-group">
+									<input type="tel" id="tbxSupplierTelEdit" required="required" />
+									<span class="input-group-addon" >
+										<span class="glyphicon glyphicon-asterisk"></span>
+									</span>
+								</div>
+							</div>
+							<div>
+								<label for="cbkConsumptiveEdit">耗材：</label>
+								<div class="input-group">
+									<input type="checkbox" id="cbkConsumptiveEdit" required="required" />
+								</div>
+							</div>
+							<div>
+								<label for="tbxCommentEdit">其他说明：</label>
+								<div class="input-group">
+									<textarea rows="2" id="tbxCommentEdit"></textarea>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn-primary" id="btnSaveAssets">
+							<span class="glyphicon glyphicon-floppy-saved" /> 保存 Save</button>
+					<button class="btn-default" data-dismiss="modal" id="btnCancel">
+							<span class="glyphicon glyphicon-remove" /> 取消 Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 资产入库操作 -->
+	<div id="divAssetsInstock"  tabindex="-1" role="dialog" aria-labelledby="assetsInstockTitle" aria-hidden="true">
+		<div class="modal-dialog">
+			<div id="content" class="modal-content">
+				<div id="assetsInstockHead" class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="assetsInstockTitle"><span class="glyphicon glyphicon-equalizer"></span>资产入库 </h4>
+				</div>
+				<div class="modal-body">
+					<form id="formInstock">
+						<input type="hidden" id="hidAssetsIdForInstock" value="" />
+						<div id="divInstockAlert" role="alert"></div>
+						<div id="divInstockContent">
+							<div>
+								<label for="tbxAssetsNameShow">资产名称：</label>
+								<div class="input-group">
+									<input type="text" id="tbxAssetsNameForInstock" readonly="readonly" />
+								</div>
+							</div>
+							<div>
+								<label for="tbxInstockCount">入库数量：</label>
+								<div class="input-group">
+									<input type="number" min="0" id="tbxInstockCount" required="required" />
+									<span class="input-group-addon" >
+										<span class="glyphicon glyphicon-asterisk" ></span>
+									</span>
+								</div>
+							</div>
+							<div>
+								<label for="tbxInstockPrice">入库单价：</label>
+								<div class="input-group">
+									<span class="input-group-addon">￥</span>
+									<input type="number" min="0" id="tbxInstockPrice" required="required" />
+									<span class="input-group-addon" >
+										<span class="glyphicon glyphicon-asterisk" ></span>
+									</span>
+								</div>
+							</div>
+							<div>
+								<label for="tbxInstockSum">金额合计：</label>
+								<div class="input-group">
+									<span class="input-group-addon">￥</span>
+									<input type="text" readonly="readonly" min="0" id="tbxTotalPrice" />
+								</div>
+							</div>
+							<div>
+								<label for="tbxInstockDate">入库时间：</label>
+								<div class="input-group">
+									<input type="date" id="tbxInstockDate" required="required" />
+									<span class="input-group-addon" >
+										<span class="glyphicon glyphicon-asterisk" ></span>
+									</span>
+								</div>
+							</div>
+							<div>
+								<label for="selHandlerEmp">资产购置人：</label>
+								<div class="input-group">
+									<select id="selHandlerEmp" required="required"></select>
+								</div>
+							</div>
+							<div>
+								<label for="tbxInstockComment">备注说明：</label>
+								<div class="input-group">
+									<textarea rows="2" id="tbxInstockComment"></textarea>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn-primary" id="btnInstock">
+							<span class="glyphicon glyphicon-save" /> 入库 Instock</button>
+					<button class="btn-default" data-dismiss="modal" id="btnCancelInstock">
+							<span class="glyphicon glyphicon-remove" /> 取消 Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 物流信息窗口 -->
+	<div id="divTransHistory" tabindex="-1" role="dialog" aria-labelledby="assetsInstockTitle" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div id="content" class="modal-content">
+				<div id="transHistoryHead" class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="transHistoryTitle"><span class="glyphicon glyphicon-equalizer"></span>资产流转记录 </h4>
+				</div>
+				<div class="modal-body">
+					<table id="tblTransHistory">
+					</table>
+				</div>
+				<div class="modal-footer">
+					<div id="divAssetsStocking">
+						合计入库数量：<span id="spanInstockCount"></span>
+						合计出库数量：<span id="spanDeliveryCount"></span>
+						当前库存合计：<span id="spanStockCount"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="js/bower_components/requirejs/require.js" data-main="js/logic/normalAssets"></script>
+</html>

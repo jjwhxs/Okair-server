@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<base href="/">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div id="divSearchForm" class="col-md-10">
+				<div>
+					<label for="tbxUid">用户名：</label>
+					<input type="text" id="tbxUid" />
+				</div>
+				<div>
+					<label for="selSysUserRole">用户权限：</label>
+					<select id="selSysUserRole" ><option value="-1">全部</option></select>
+				</div>
+				<div>
+					<button type="button" id="btnSearch" class="btn-primary">
+						<span class="glyphicon glyphicon-search" />
+						检索Search
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-10">
+				<div id="divResult">
+					<table id="tblResult">
+						<thead>
+							<tr>
+								<th><span class='glyphicon glyphicon-tags' />用户名</th>
+								<th>权限</th>
+								<th>昵称</th>
+								<th>创建时间</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="js/bower_components/requirejs/require.js" data-main="js/logic/sysUser"></script>
+</html>

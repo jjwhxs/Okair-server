@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base href="/">
+<meta charset="UTF-8">
+<title>奥凯航空资产管理系统</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class=" col-md-12 page-header">
+				<h1 style="float: left; margin-top: 0px">
+					奥凯航空 <small>资产管理系统</small>
+				</h1>
+				<div style="float: right;margin-right: 50px;font-size: 110%;vertical-align: middle;">
+					<span class="glyphicon glyphicon-time" /><span id="spanCurrentTime"></span>&nbsp;&nbsp;
+					<span class="glyphicon glyphicon-user" /> <b>欢迎您，</b><span id="spanUserName"></span>
+					<button class="btn button-default"><span class="glyphicon glyphicon-off"></span> 注销</button>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">
+				<div id="tree"></div>
+			</div>
+			<div class="col-md-10">
+				<div class="row">
+					<div class="col-md-12">
+						<ol class="breadcrumb" id="breadcrumb">
+							<li><a href="/html/mainPage.html" target="contentFrame" id="mainPageLink">首页</a></li>
+						</ol>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="embed-responsive embed-responsive-16by9">
+							<iframe id="contentFrame" name="contentFrame"
+								class="embed-responsive-item" src="/html/mainPage.html"></iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript"
+	src="js/bower_components/requirejs/require.js"
+	data-main="js/logic/index"></script>
+</html>

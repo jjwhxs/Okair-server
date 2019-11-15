@@ -1,0 +1,58 @@
+# SpringMVC相关功能配置
+spring:
+  http:
+    encoding:
+      enabled: true
+      charset: utf-8
+      force: true
+  # 数据源配置（使用Druid数据源）
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/xiangmu?useSSL=false&useUnicode=true&characterEncoding=utf-8 
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    initialSize: 3
+    minIdle: 2
+    maxActive: 10
+  mvc:
+    view:
+      suffix: .html
+      prefix: /html/
+  # devTools工具开启，浏览器安装必要插件后，可以自动刷新
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+      
+# myBatis相关参数配置
+mybatis:
+  configuration:
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
+    cache-enabled: true
+  mapper-locations:
+  - classpath:com/iss/okair/db/mapper/*.xml
+  type-handlers-package: com.iss.okair.db.entity
+  
+#开启myBatis的调试功能
+logging:
+  level:
+    com.iss.okair.db.mapper: debug
+    
+#服务器是否开启压缩功能
+server:
+  compression:
+    enabled: false
+  port: 8080
+debug: false
+
+# 终端调试信息是否可查（actuator模块）
+#endpoints:
+#  sensitive: true
+
+ 
+    
+
+    

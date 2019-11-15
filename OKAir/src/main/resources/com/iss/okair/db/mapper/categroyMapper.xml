@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="com.iss.okair.db.mapper.CategroyMapper">
+
+	<resultMap type="com.iss.okair.db.entity.categroy" id="BaseResultMap">
+		<id property="id" jdbcType="INTEGER" column="id" />
+		<result property="code" jdbcType="VARCHAR" column="code" />
+		<result property="parentid" jdbcType="INTEGER" column="parentId" />
+		<result property="namecn" jdbcType="VARCHAR" column="nameCn" />
+		<result property="comment" jdbcType="VARCHAR" column="comment" />
+		<result property="parentname" jdbcType="VARCHAR" column="parentName" />
+
+		<!-- <association property="namecn" column="nameCn" select="com.iss.okair.db.entity.Categoryparent"></association> -->
+	</resultMap>
+
+
+	<sql id="category">
+		id,code,parentId,nameCn,comment
+	</sql>
+	<select id="select" parameterType="com.iss.okair.db.entity.categroy"
+		resultMap="BaseResultMap">
+		select
+		<include refid="category" />
+		,(select namecn from category parent where
+		parent.id=category.parentid) as parentName
+		from category
+
+		<where>
+			<if test="parentid != null and parentid !='-1'">
+				and parentId =#{parentid,jdbcType=INTEGER}
+			</if>
+			<if test="namecn != null and namecn !=''">
+				<bind name="nameCn" value="'%'+namecn+'%'" />
+				and namecn like '${nameCn}'
+			</if>
+
+		</where>
+	</select>
+<select id="CategroyPrimarykey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+      select
+      <include refid="category"/>
+      ,(select namecn from category parent where
+		parent.id=category.parentid) as parentName
+		from category
+		where id = #{id,jdbcType=INTEGER}
+</select>
+<select id="categroyParentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select 
+		<include refid="category"/>
+		,(select namecn from category parent where
+		parent.id=category.parentid) as parentName
+		from category
+		<where>
+			<if test="_parameter !=null ">
+	           parentId = #{parentid,jdbcType=INTEGER} 
+			</if>
+			<if test="_parameter == null">
+			   parentId is null
+			</if>
+		</where>
+       
+	</select>
+</mapper>
